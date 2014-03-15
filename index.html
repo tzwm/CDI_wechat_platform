@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CDI_wechat_platform_test</title>
+    </head>
+
+    <body>
+        <div id="content">tzwm</div>
+    </body>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var  socket = io.connect('http://m.tzwm.me:80');
+        socket.on('msg-text', function(data) {
+            document.getElementById('content').innerHTML = data.Content;
+        });    
+    </script>
+
+</html>
