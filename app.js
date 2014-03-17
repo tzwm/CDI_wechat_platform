@@ -1,10 +1,10 @@
-var PORT = 80;
-var TOKEN = 'cdi';
+var PORT = 80; // wechat require 80 port
+var TOKEN = 'cdi';  
 
-var restify = require('restify');
-var crypto = require('crypto');
-var xml2js = require('xml2js');
-var fs = require('fs');
+var restify = require('restify'); // REST web service
+var crypto = require('crypto'); // SHA1
+var xml2js = require('xml2js'); // XML parser
+var fs = require('fs'); // about filesystem
 
 var server = restify.createServer();
 server.use(restify.queryParser());
@@ -13,13 +13,13 @@ server.use(restify.bodyParser());
 var io = require('socket.io').listen(server);
 
 
-server.get('/wechat', auth);
-server.post('/wechat', receiveMsg);
+server.get('/wechat', auth);  // http://mp.weixin.qq.com/wiki/index.php?title=%E9%AA%8C%E8%AF%81%E6%B6%88%E6%81%AF%E7%9C%9F%E5%AE%9E%E6%80%A7
+server.post('/wechat', receiveMsg); // http://mp.weixin.qq.com/wiki/index.php?title=%E6%8E%A5%E6%94%B6%E6%99%AE%E9%80%9A%E6%B6%88%E6%81%AF
 
-server.get('/index', index);
+server.get('/index', index); // render index.html for testing 
 
 
-function auth(req, res, next) {
+function auth(req, res, next) {  
     var signature = req.params.signature;
     var timestamp = req.params.timestamp;
     var nonce = req.params.nonce;
